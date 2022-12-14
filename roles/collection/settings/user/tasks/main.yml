@@ -1,0 +1,17 @@
+---
+
+- name: Are we inside docker?
+  include_role:
+    name: utils/are_we_in_docker
+
+- name: Configure user settings
+  include_role:
+    name: settings/user
+  when:
+    - settings_user is defined
+
+- name: Configure application settings
+  include_role:
+    name: settings/application
+  when:
+    - settings_application is defined

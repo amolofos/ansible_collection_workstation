@@ -1,0 +1,28 @@
+---
+
+- name: Are we inside docker?
+  include_role:
+    name: utils/are_we_in_docker
+
+- name: Install latest software packages
+  include_role:
+    name: software
+  vars:
+    state: install_latest
+    cache_valid_time: "{{ package_manager.cache_valid_time }}"
+  when:
+    - software is defined
+
+- name: Configure alternative applications
+  include_role:
+    name: software
+  vars:
+    state: configure_alternative
+  when:
+    - software is defined
+
+- name: Cleanup
+  include_role:
+    name: software
+  vars:
+    state: cleanup

@@ -1,0 +1,28 @@
+---
+
+- name: Gather facts
+  ansible.builtin.gather_facts:
+
+- name: Install software
+  include_role:
+    name: collection/software/install
+
+- name: Update software
+  include_role:
+    name: collection/software/update
+
+- name: Configure system
+  include_role:
+    name: collection/settings/system
+
+- name: Install users
+  include_role:
+    name: collection/system/user
+
+- name: Configure users
+  include_role:
+    name: collection/settings/user
+
+- name: Install and configure bluetooth
+  include_role:
+    name: collection/system/bluetooth
