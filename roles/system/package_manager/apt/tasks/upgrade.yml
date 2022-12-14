@@ -28,7 +28,11 @@
 
 - name: Notify user that a reboot is needed
   ansible.builtin.shell: >-
-    sudo -iu "{{ system_user.key }}" sh -c "notify-send -t 0 -i face-wink 'Reboot is needed' 'Automated unattended upgrade has finished. A system reboot is required.'"
+    sudo -iu "{{ system_user.key }}" sh -c "
+      notify-send -t 0 -i face-wink \
+        'Reboot is needed' \
+        'Automated unattended upgrade has finished. A system reboot is required.' \
+    "
   loop:
     "{{ query('dict', users | default({})) }}"
   loop_control:

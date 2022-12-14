@@ -1,9 +1,0 @@
----
-
-- name: Are we inside docker?
-  include_role:
-    name: utils/are_we_in_docker
-
-- name: Install and configure bluetooth
-  include_role:
-    name: system/bluetooth

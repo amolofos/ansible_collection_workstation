@@ -1,9 +1,9 @@
 ---
 
 # https://tuhrig.de/how-to-know-you-are-inside-a-docker-container/
-- name: Checking whether we are inside docker  # noqa fqcn-builtins
+- name: Checking whether we are inside docker  # noqa fqcn[action-core]
   register: inside_docker_out
-  shell: |
+  ansible.builtin.shell: |
     set -o pipefail
     cat /proc/self/cgroup | grep -c "/docker/" || true
   args:

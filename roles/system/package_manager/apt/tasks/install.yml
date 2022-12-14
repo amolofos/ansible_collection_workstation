@@ -1,7 +1,7 @@
 ---
 
 - name: Adding repository key
-  include: add_key.yml
+  ansible.builtin.import_tasks: add_key.yml
   vars:
     url: "{{ key }}"
     state: "present"
@@ -11,7 +11,7 @@
     loop_var: key
 
 - name: Adding repository
-  include: add_repository.yml
+  ansible.builtin.import_tasks: add_repository.yml
   vars:
     repo: "{{ repository }}"
     state: "present"

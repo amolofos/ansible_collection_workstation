@@ -1,12 +1,12 @@
 ---
 
 - name: Are we inside docker?
-  include_role:
-    name: utils/are_we_in_docker
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.utils.are_we_in_docker
 
 - name: Upgrade to latest software packages
-  include_role:
-    name: software
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software
   vars:
     state: upgrade
     cache_valid_time: "{{ package_manager.cache_valid_time }}"
@@ -14,7 +14,7 @@
     - software is defined
 
 - name: Cleanup
-  include_role:
-    name: software
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software
   vars:
     state: cleanup

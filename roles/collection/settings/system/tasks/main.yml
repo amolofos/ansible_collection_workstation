@@ -1,13 +1,13 @@
 ---
 
 - name: Are we inside docker?
-  include_role:
-    name: utils/are_we_in_docker
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.utils.are_we_in_docker
 
 - name: Configure locale
-  include_role:
-    name: system/locale
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.system.locale
 
 - name: Configure timezone
-  include_role:
-    name: system/timezone
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.system.timezone

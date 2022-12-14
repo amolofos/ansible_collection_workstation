@@ -1,6 +1,6 @@
 ---
 
-- name: Making sure state is defined  # noqa fqcn-builtins
+- name: Making sure state is defined  # noqa fqcn[action-core]
   assert:
     that:
       - state is defined
@@ -9,4 +9,4 @@
     quiet: true
 
 - name: "Action {{ state }}"
-  include: "{{ state }}.yml"
+  ansible.builtin.include_tasks: "{{ state }}.yml"

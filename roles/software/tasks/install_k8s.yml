@@ -1,32 +1,32 @@
 ---
 
 - name: Install minikube
-  include_role:
-    name: software-k8s-toolbox/minikube
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software_k8s_toolbox.minikube
   when:
     - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install kubectx
-  include_role:
-    name: software-k8s-toolbox/kubectx
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software_k8s_toolbox.kubectx
   when:
     - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install k9s
-  include_role:
-    name: software-k8s-toolbox/k9s
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software_k8s_toolbox.k9s
   when:
     - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install stern
-  include_role:
-    name: software-k8s-toolbox/stern
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software_k8s_toolbox.stern
   when:
     - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 - name: Install helm
-  include_role:
-    name: software-k8s-toolbox/helm
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software_k8s_toolbox.helm
   when:
     - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 

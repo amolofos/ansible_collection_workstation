@@ -3,26 +3,32 @@
 - name: Gather facts
   ansible.builtin.gather_facts:
 
+- name: Are we inside docker?
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.utils.are_we_in_docker
+
 - name: Install software
-  include_role:
-    name: collection/software/install
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.collection.software.install
 
 - name: Update software
-  include_role:
-    name: collection/software/update
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.collection.software.update
 
 - name: Configure system
-  include_role:
-    name: collection/settings/system
-
-- name: Install users
-  include_role:
-    name: collection/system/user
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.collection.settings.system
 
 - name: Configure users
-  include_role:
-    name: collection/settings/user
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.system.user
+  when:
+    - users is defined
+
+- name: Configure users
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.collection.settings.user
 
 - name: Install and configure bluetooth
-  include_role:
-    name: collection/system/bluetooth
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.system.bluetooth

@@ -4,19 +4,23 @@
 #
 set -ueo pipefail
 
+DEBIAN_FRONTEND=noninteractive
+
 REPOSITORY_BRANCH=${REPOSITORY_BRANCH:-{{ admin_cron.branch }}}
 REPOSITORY=${REPOSITORY:-{{ admin_cron.repository }}}
+
+APP_DIR=${APP_DIR:-{{ app_dir }}}
 
 log() {
 	echo "`date +"%Y-%m-%d %H:%M:%S"`: $1"
 }
 
-rm -rf {{ admin_cron.directory_tmp }} && \
-  git clone --quiet --branch $REPOSITORY_BRANCH $REPOSITORY --depth 1 {{ admin_cron.directory_tmp }} && \
-  cd {{ admin_cron.directory_tmp }} && \
-  ./scripts/scheduled-debian.sh && \
+rm -rf $APP_DIR && \
+  git clone --quiet --branch $REPOSITORY_BRANCH $REPOSITORY --depth 1 $APP_DIR && \
+  cd $APP_DIR && \
+  $APP_DIR/scripts/scheduled-debian.sh && \
   cd $HOME && \
-  rm -rf {{ admin_cron.directory_tmp }}
+  rm -rf $APP_DIR
 
 {% if admin_cron.users_to_notify is defined and admin_cron.users_to_notify | length > 0 %}
 if [ "$?" -eq "0" ]; then

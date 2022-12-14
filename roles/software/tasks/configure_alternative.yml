@@ -1,7 +1,7 @@
 ---
 
 - name: "Set debian alternatives"
-  alternatives:
+  community.general.alternatives:
     name: "{{ alt.name }}"
     path: "{{ alt.path }}"
     link: "{{ alt.link }}"

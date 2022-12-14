@@ -1,12 +1,19 @@
 ---
 
+base_dir: "/opt/automated-workstation"
+app_dir: "{{ base_dir }}/app"
+
+admin_user: "admin"
+admin_group: "admin"
+
 admin_cron:
   name: "Automated workstation setup"
   minute: "0"
   hour: "13"
-  job: "/home/admin/scripts/admin-cronjob.sh > /home/admin/logs/admin-cronjob.log.`date \"+\\%Y-\\%m-\\%d_\\%H\"` 2>&1"
+  job: "/opt/automated-workstation/cron/admin-cronjob.sh > /home/admin/logs/admin-cronjob.log.`date \"+\\%Y-\\%m-\\%d_\\%H\"` 2>&1"
 
-  directory_tmp: "/home/admin/automated-workstation-setup/"
+  installation_dir: "{{ base_dir }}/cron"
+  script_name: "admin-cronjob.sh"
 
   branch: "main"
 

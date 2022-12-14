@@ -4,19 +4,19 @@
 # -----------------------------------------------------------------------------
 
 - name: Ensure localisation files for '{{ system.locale }}' are available
-  ansible.builtin.locale_gen:
+  community.general.locale_gen:
     name: "{{ system.locale }}"
     state: present
 
 - name: Ensure localisation files for '{{ system.language }}' are available
-  ansible.builtin.locale_gen:
+  community.general.locale_gen:
     name: "{{ system.language }}"
     state: present
 
-- name: Get current locale and language configuration  # noqa fqcn-builtins
+- name: Get current locale and language configuration
   register: locale_status
-  shell: >-
-    localectl status
+  ansible.builtin.command: >-
+    locale
   changed_when: false
 
 - name: Parse 'LANG' from current locale and language configuration
@@ -33,8 +33,8 @@
   when:
     - locale_lang != system.locale or locale_language != system.language
 
-- name: Configure locale to '{{ system.locale }}' and language to '{{ system.language }}'  # noqa fqcn-builtins
-  shell: >-
-    localectl set-locale LANG={{ system.locale }} LANGUAGE={{ system.language }}
+- name: Configure locale to locale '{{ systemm.locale }}' and language '{{ system.language }}'  # noqa fqcn[action-core]
+  ansible.builtin.command: >-
+    update-locale LANG={{ system.locale }} LANGUAGE={{ system.language }}
   when:
     - locale_lang != system.locale or locale_language != system.language

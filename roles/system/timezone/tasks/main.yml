@@ -2,8 +2,10 @@
 
 - name: Set timezone
   register: test_out
-  timezone:
+  community.general.timezone:
     name: "{{ system.timezone }}"
+  # Github workflow run cannot find our timezone.
+  ignore_errors: true
   when:
     - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
     # timedatectl command does not work inside docker...

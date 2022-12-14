@@ -1,19 +1,19 @@
 ---
 
-- name: Create /home/admin/scripts directory
+- name: Create installation directory
   ansible.builtin.file:
-    path: /home/admin/scripts
+    path: "{{ admin_cron.installation_dir }}"
     state: directory
-    owner: "admin"
-    group: "admin"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_group }}"
     mode: "700"
 
 - name: Install cronjob script
   ansible.builtin.template:
     src: "admin-cronjob.sh.j2"
-    dest: "/home/admin/scripts/admin-cronjob.sh"
-    owner: "admin"
-    group: "admin"
+    dest: "{{ admin_cron.installation_dir }}/{{ admin_cron.script_name }}"
+    owner: "{{ admin_user }}"
+    group: "{{ admin_group }}"
     mode: "700"
     backup: false
 
@@ -23,4 +23,4 @@
     job: "{{ admin_cron.job }}"
     minute: "{{ admin_cron.minute }}"
     name: "{{ admin_cron.name }}"
-    user: "admin"
+    user: "{{ admin_user }}"

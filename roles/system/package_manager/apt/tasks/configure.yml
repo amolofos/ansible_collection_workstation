@@ -8,7 +8,7 @@
 - name: Install HTTPS transport for APT
   ansible.builtin.apt:
     pkg: apt-transport-https
-    state: installed
+    state: present
   when:
     - not apt_https_transport.stat.exists
 

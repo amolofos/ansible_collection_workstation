@@ -1,7 +1,7 @@
 ---
 
 - name: "Install latest version of software for {{ title }}"
-  snap:
+  community.general.snap:
     name: "{{ package }}"
     state: "present"
     classic: "yes"

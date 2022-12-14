@@ -1,16 +1,16 @@
 ---
 
 # application_settings:
-#   dconf:
+#   community.general.dconf:
 #     debian:
 #       - { "key": "com/ubuntu/sound/allow-amplified-volume", "value": "false" }
-- name: Setup dconf settings for Debian system
-  dconf:
-    key: "{{ dconf.key }}"
-    value: "{{ dconf.value }}"
+- name: Setup community.general.dconf settings for Debian system
+  community.general.dconf:
+    key: "{{ community.general.dconf.key }}"
+    value: "{{ community.general.dconf.value }}"
     state: "present"
-  loop: "{{ settings_application.dconf.debian | default([]) }}"
+  loop: "{{ settings_application.community.general.dconf.debian | default([]) }}"
   loop_control:
-    loop_var: dconf
+    loop_var: community.general.dconf
   when:
     - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
