@@ -1,0 +1,9 @@
+# Ansible
+.ansibleFactsCacheDir/*
+*.retry
+
+# Build
+**/build
+
+# Python
+**/.venv

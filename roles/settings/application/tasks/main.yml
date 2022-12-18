@@ -1,0 +1,21 @@
+---
+
+- name: Applying gsettings
+  ansible.builtin.import_tasks: gsettings.yml
+  when:
+    - settings_application.gsettings | length > 0
+
+- name: Applying dconf
+  ansible.builtin.import_tasks: dconf.yml
+  when:
+    - settings_application.dconf | length > 0
+
+- name: Creating dot-files
+  ansible.builtin.import_tasks: dot-files.yml
+  when:
+    - settings_application.dot_files | length > 0
+
+- name: Handling vscode settings
+  ansible.builtin.import_tasks: vscode.yml
+  when:
+    - settings_application.vscode | length > 0

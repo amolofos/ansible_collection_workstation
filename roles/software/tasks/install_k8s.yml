@@ -1,0 +1,42 @@
+---
+
+- name: Install minikube
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software_k8s_toolbox.minikube
+  when:
+    - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install kubectx
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software_k8s_toolbox.kubectx
+  when:
+    - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install k9s
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software_k8s_toolbox.k9s
+  when:
+    - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install stern
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software_k8s_toolbox.stern
+  when:
+    - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install helm
+  ansible.builtin.include_role:
+    name: amolofos.ansible_collection_workstation.software_k8s_toolbox.helm
+  when:
+    - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Install rancher
+  community.docker.docker_container:
+    name: rancher-server
+    image: "rancher/rancher:{{ rancher_version }}"
+    state: started
+    detach: true
+    published_ports: "{{ rancher_exposed_ports }}"
+    pull: true
+    restart: true
+    restart_policy: "unless-stopped"

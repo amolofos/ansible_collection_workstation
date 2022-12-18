@@ -1,0 +1,6 @@
+---
+
+# https://github.com/ahmetb/kubectx
+kubectx_installation_path: "/opt/github/kubectx"
+
+kubectx_version: "master"

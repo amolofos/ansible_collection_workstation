@@ -1,0 +1,14 @@
+---
+
+- name: Gather facts
+  import_playbook: tools_gather_facts.yml
+
+- name: Setup admin cronjob
+  hosts: all
+
+  collections:
+    - amolofos.ansible_collection_workstation
+
+  roles:
+
+    - role: admin_cronjob

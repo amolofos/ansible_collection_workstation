@@ -1,0 +1,30 @@
+---
+
+- name: Does bluetooh exist?  # noqa fqcn[action-core]
+  register: bluetooth_out
+  ansible.builtin.shell: |
+    set -o pipefail
+    sudo find /var/lib/bluetooth/ -type f -name info -print0 | xargs -0 sudo grep -iE 'Class=0x[0-9a-f]{3}5[4c]0' | wc -l || true
+  args:
+    executable: /bin/bash
+  changed_when: false
+  when:
+    - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Bluetooth on login
+  ansible.builtin.import_tasks: enable-on-login.yml
+  when:
+    - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    - bluetooth_out.stdout | int > 0
+
+- name: Bluetooth on boot
+  ansible.builtin.import_tasks: enable-on-boot.yml
+  when:
+    - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    - bluetooth_out.stdout | int > 0
+
+- name: Bluetooth and pulseaudio
+  ansible.builtin.import_tasks: update-pulseaudio.yml
+  when:
+    - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    - bluetooth_out.stdout | int > 0

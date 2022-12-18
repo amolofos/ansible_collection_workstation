@@ -1,0 +1,25 @@
+---
+
+base_dir: "/opt/automated-workstation"
+app_dir: "{{ base_dir }}/app"
+
+admin_user: "admin"
+admin_group: "admin"
+
+admin_cron:
+  name: "Automated workstation setup"
+  minute: "0"
+  hour: "13"
+  job: "/opt/automated-workstation/cron/admin-cronjob.sh > /home/admin/logs/admin-cronjob.log.`date \"+\\%Y-\\%m-\\%d_\\%H\"` 2>&1"
+
+  installation_dir: "{{ base_dir }}/cron"
+  script_name: "admin-cronjob.sh"
+
+  branch: "main"
+
+  repository: "https://github.com/amolofos/automated-workstation-setup.git"
+
+  users_to_notify: []
+
+  notify_message_success: "Automated workstation setup has been successful."
+  notify_message_failure: "Automated workstation setup has failed."

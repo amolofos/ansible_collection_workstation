@@ -1,0 +1,6 @@
+---
+
+- name: Locale for Debian
+  ansible.builtin.import_tasks: locale-debian.yml
+  when:
+    - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
